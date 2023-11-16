@@ -19,11 +19,10 @@ import java.util.concurrent.CompletableFuture;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository repository;
-
     Object target;
     Logger logger = LoggerFactory.getLogger(UserService.class);
+    @Autowired
+    private UserRepository repository;
 
     @Async
     public CompletableFuture<List<User>> saveUsers(MultipartFile file) throws Exception {
@@ -35,10 +34,11 @@ public class UserService {
         logger.info("Total time {}", (end - start));
         return CompletableFuture.completedFuture(users);
     }
+
     @Async
-    public CompletableFuture<List<User>> findAllUsers(){
-        logger.info("get list of user by "+Thread.currentThread().getName());
-        List<User> users=repository.findAll();
+    public CompletableFuture<List<User>> findAllUsers() {
+        logger.info("get list of user by " + Thread.currentThread().getName());
+        List<User> users = repository.findAll();
         return CompletableFuture.completedFuture(users);
     }
 
